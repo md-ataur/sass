@@ -1,0 +1,132 @@
+/* Partials and Import */
+@import '_default';
+@import '_mixin';
+@import '_inheritance';
+@import '_responsive';
+
+
+.wrapper {
+    width: 1100px;
+    margin: 0 auto;
+    @media #{$medium_device} {
+        width: 992px;
+    }
+    @media #{$tab_device} {
+        width: 100%;
+    }
+    @media #{$small_mobile} {
+        width: 100%;
+    }
+}
+
+h1 {
+    color: $title-color;
+    font-family: $font;
+}
+
+
+/* Operators */
+article[role="main"] {
+    float: left;
+    width: 600px / 960px * 100%;
+}
+
+
+/* extend/inheritance */
+.message {
+    @extend .message-shared;
+}
+.success {
+    @extend .message-shared;
+    border-color: green;
+}
+.warning {
+    @extend .message-shared;
+    border-color: red;
+}
+
+
+/* Nesting */
+nav {
+    ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        li {
+            display: inline-block;
+            position: relative;
+            a {
+                display: block;
+                font-size: 13px;
+                font-family: $font;
+                text-decoration: none;
+                background: #4fb0ee;
+                padding: 15px 20px;
+                color: #fff;
+                text-transform: uppercase;
+                &:hover {
+                    background-color: #3287c9;
+                }
+            }
+            ul.child {
+                position: absolute;
+                width: 200px;
+                top: 130%;
+                left: 0;
+                z-index: 99;
+                @include transition(.3s);
+                opacity: 0;
+                visibility: hidden;
+                li {
+                    display: block;
+                    a {
+                        padding: 12px 20px;
+                        &:hover {
+                            background-color: #3287c9;
+                        }
+                    }
+                }
+            }
+            &:hover ul.child {
+                opacity: 1;
+                visibility: visible;
+                top: 100%;
+            }
+            .mega-menu {
+                position: absolute;
+                width: 700px;
+                left: 0;
+                top: 130%;
+                z-index: 99;
+                @include transition(.3s);
+                visibility: hidden;
+                opacity: 0;
+                @media #{$tab_device} {
+                    width: 550px;
+                    left: -80%;
+                    z-index: 99;
+                }
+                @media #{$small_mobile} {
+                    width: 300px;
+                    left: -80%;
+                }
+                ul {
+                    width: 33.33%;
+                    float: left;
+                    li {
+                        display: block;
+                        position: relative;
+                        a {
+                            padding: 12px 20px;
+                        }
+                    }
+                }
+            }
+            &:hover .mega-menu {
+                visibility: visible;
+                opacity: 1;
+                top: 100%
+            }
+        }
+    }
+}
